@@ -40,7 +40,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'harshdockerhub'
-        repository: 'harshhvardhan03/testingaz'
+        repository: $(imageName)
         command: 'push'
         tags: |
          test1  
