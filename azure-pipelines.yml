@@ -1,43 +1,16 @@
-# Docker
-# Build a Docker image 
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - master
 
+pool:
+  vmImage: 'Ubuntu-16.04'
 
 variables:
-  tag: '$(Build.BuildId)'
+  imageName: 'pipelines-javascript-docker'
 
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:  
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        repository: harshvardhan03/az
-       
-
-- stage: Push
-  displayName: Push image to docker hub
-  jobs:
-  - job: Push
-    displayName: Push image to dockerhub
-    pool:
-      vmImage: "ubuntu-latest"
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'harshdockerhub'
-        command: 'push'
-        repository:  harshvardhan03/az
-         
-
+steps:
+- task: Docker@2
+  displayName: Build an image
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: Dockerfile
