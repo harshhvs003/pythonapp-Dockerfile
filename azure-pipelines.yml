@@ -20,6 +20,4 @@ steps:
     containerRegistry: 'harshdockerhub'
     repository: '$(imageName)'
     command: 'push'
-    tags: |
-      test1
-      test2
+
