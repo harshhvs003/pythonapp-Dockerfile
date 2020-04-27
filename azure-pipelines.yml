@@ -5,8 +5,6 @@
 trigger:
 - master
 
-resources:
-- repo: self
 
 variables:
   tag: '$(Build.BuildId)'
@@ -25,9 +23,8 @@ stages:
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
-
+        repository: harshvardhan03/az
+       
 
 - stage: Push
   displayName: Push image to docker hub
@@ -41,7 +38,6 @@ stages:
       inputs:
         containerRegistry: 'harshdockerhub'
         command: 'push'
-        repository: $(tag)
-       
+        repository:  harshvardhan03/az
          
 
