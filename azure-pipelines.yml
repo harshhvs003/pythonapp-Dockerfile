@@ -40,5 +40,8 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'harshdockerhub'
-        command: 'push'  
+        repository: 'harshdockerhub/testingaz'
+        command: 'push'
+        tags: |
+         test1  
 
